@@ -1,26 +1,30 @@
 <%-- 
-    Document   : index.jsp
+    Document   : Support
+    Created on : Jan 21, 2018, 7:46:30 PM
     Author     : PRAKHAR
 --%>
-<%@page import="java.sql.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.Random"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*"%>
 <%
     int rno;
     Random r = new Random();
-    rno = r.nextInt(Integer.MAX_VALUE);//Integer.max_value is the largest possible value of integer
-    Connection con;
-    Statement st;
-    ResultSet rs;
+    rno = r.nextInt(Integer.MAX_VALUE);
+    Date date = new java.util.Date();
+    int d = date.getDate();
+    int m = date.getMonth() + 1;
+    int y = date.getYear() + 1900;
+    String fbdt = String.valueOf(d) + "/" + String.valueOf(m) + "/" + String.valueOf(y);
 %>
-<!doctype html>
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>book my movie</title>
-         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <title>book my movie</title>
     </head>
     <body>
         <div class="container-fluid">
@@ -65,7 +69,7 @@
                             </ul>
                         </div>
                     </nav>
-                                <!--Sign in modal starts-->
+            <!--Sign in modal starts-->
                          <div class="col-md-12">
                         <div class="modal fade" id="modal-container-850926" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -104,7 +108,7 @@
 
                         </div>                        
                         <!--Signin modal khatam-->
-                        <!--Register Modal Begins-->
+ <!--Register Modal Begins-->
                           <div class="col-md-12">
                             <div class="modal fade" id="modal-container-850927" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -170,7 +174,7 @@
                                 </div>
                             </div>
                             <!--Register modal ends-->  
-                          <p align="center" style="background-color: #f8f8f8;"><i>
+                              <p align="center" style="background-color: #f8f8f8;"><i>
                                     <%
                                         String regmsg = (String) request.getAttribute("regmsg");
                                         if (regmsg == null) {
@@ -200,94 +204,86 @@
                                         }
                                     %>
                                 </i></p>
-                           <div class="carousel slide" id="carousel-793811">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-slide-to="0" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="1" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="2" data-target="#carousel-793811">
-                                    </li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img alt="Carousel Bootstrap First" src="images/10.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Second" src="images/6.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Third" src="images/5.jpg">                                        
-                                    </div>
-                                </div> <a class="left carousel-control" href="#carousel-793811" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-793811" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                      
-                         
-                </div>
-                                 <div class="row">
-                    <div class="col-md-12">&nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">
-                                                Panel title
-                                            </h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            Panel content
-                                        </div>
-                                        <div class="panel-footer">
-                                            Panel footer
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="row">
-                                        <%
-                                            try {
-                                                Class.forName("oracle.jdbc.driver.OracleDriver");
-                                                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "niit123");
-                                                st = con.createStatement();
-                                                rs = st.executeQuery("select * from movies where status='true'");
-                                                while (rs.next()) {%>
-                                        <div class="col-md-4">
-                                            <div class="thumbnail">
-                                                <img alt="<%=rs.getString("TITLE")%>" src="<%=rs.getString("poster")%>" width="180" height="150" />
-                                                <div class="caption">
-                                                    <p>
-                                                        <%=rs.getString("TITLE")%><br>
-                                                        <%=rs.getString("LANGUAGE")%><br>
-                                                    </p>
-                                                    <a href="bookingpage.jsp?t=<%=rs.getString("TITLE")%>&p=<%=rs.getString("poster")%>"><button class="btn btn-primary">Book Now</button></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                con.close();
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
+  </div>
                     </div>
                 </div>
             </div>
-                                    <!-- admin sign in modal starts-->
+                                 <div class="row">
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+                <div class="col-md-6" style="background-color: #f8f8f8;">
+                    <h4 style="text-align: center;">May I Help You...</h4>
+                </div>
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+
+                <div class="col-md-6" style="background-color: #f8f8f8;">
+                    <p>
+                        <i>
+               <%
+                                String supmsg = (String) request.getAttribute("supmsg");
+                                if (supmsg == null) {
+                                    out.println("");
+                                } else {
+                                    out.println(supmsg);
+                                }
+                            %>
+                        </i>
+                    </p>
+                     <form action="support" method="post">
+                        <table class="table" style="width:100%;">
+                            <tr>
+                                <th>Date</th>
+                                <td><input width="25" class="form-control" type="text" name="fbdt" value="<%=fbdt%>" readonly/></td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td><input class="form-control" type="text" name="name" required/></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><input class="form-control" type="email" name="email" required/></td>
+                            </tr>
+                            <tr>
+                                <th>Phone No</th>
+                                <td><input class="form-control" type="text" name="phone" required/></td>
+                            </tr>
+                            <tr>
+                                <th>Subject</th>
+                                <td><input class="form-control" type="text" name="sbjct" required/></td>
+                            </tr>
+                            <tr>
+                                <th>Query</th>
+                                <td><textarea class="form-control" name="query" rows="6" cols="30" required></textarea></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2" style="text-align: center;">
+                                    <input type="submit" value="Submit" class="btn btn-primary btn-lg"/>
+                                </th>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+                               <!-- admin sign in modal starts-->
                                     <div class="col-md-12">
                 <div class="modal fade" id="modal-container-850928" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -345,6 +341,5 @@
                 </div>
             </div>
         
-       
     </body>
 </html>

@@ -1,5 +1,6 @@
 <%-- 
-    Document   : index.jsp
+    Document   : forgotpwd
+    Created on : Jan 20, 2018, 12:15:16 AM
     Author     : PRAKHAR
 --%>
 <%@page import="java.sql.*"%>
@@ -12,6 +13,16 @@
     Statement st;
     ResultSet rs;
 %>
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>book my movie</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
 <!doctype html>
 <html>
     <head>
@@ -170,7 +181,7 @@
                                 </div>
                             </div>
                             <!--Register modal ends-->  
-                          <p align="center" style="background-color: #f8f8f8;"><i>
+<p align="center" style="background-color: #f8f8f8;"><i>
                                     <%
                                         String regmsg = (String) request.getAttribute("regmsg");
                                         if (regmsg == null) {
@@ -200,94 +211,61 @@
                                         }
                                     %>
                                 </i></p>
-                           <div class="carousel slide" id="carousel-793811">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-slide-to="0" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="1" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="2" data-target="#carousel-793811">
-                                    </li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img alt="Carousel Bootstrap First" src="images/10.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Second" src="images/6.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Third" src="images/5.jpg">                                        
-                                    </div>
-                                </div> <a class="left carousel-control" href="#carousel-793811" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-793811" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                      
-                         
-                </div>
-                                 <div class="row">
-                    <div class="col-md-12">&nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">
-                                                Panel title
-                                            </h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            Panel content
-                                        </div>
-                                        <div class="panel-footer">
-                                            Panel footer
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="row">
-                                        <%
-                                            try {
-                                                Class.forName("oracle.jdbc.driver.OracleDriver");
-                                                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "niit123");
-                                                st = con.createStatement();
-                                                rs = st.executeQuery("select * from movies where status='true'");
-                                                while (rs.next()) {%>
-                                        <div class="col-md-4">
-                                            <div class="thumbnail">
-                                                <img alt="<%=rs.getString("TITLE")%>" src="<%=rs.getString("poster")%>" width="180" height="150" />
-                                                <div class="caption">
-                                                    <p>
-                                                        <%=rs.getString("TITLE")%><br>
-                                                        <%=rs.getString("LANGUAGE")%><br>
-                                                    </p>
-                                                    <a href="bookingpage.jsp?t=<%=rs.getString("TITLE")%>&p=<%=rs.getString("poster")%>"><button class="btn btn-primary">Book Now</button></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                con.close();
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                          </div>
+                         </div>   
                 </div>
             </div>
-                                    <!-- admin sign in modal starts-->
+                   <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8" style="background-color: #f8f8f8;">
+                    <h4 style="text-align: center;">Forgot Password ? </h4>
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8" style="background-color: #f8f8f8;">
+                    <%
+                       String remsg=(String) request.getAttribute("resmsg");
+                       if(remsg==null)
+                           out.println("");
+                       else
+                           out.println(remsg);
+                    %>
+                    <form action="EmailSendingServlet" method="post">
+                        <table class="table table-striped" style="text-align: center;">
+                            <tr>
+                                <td><label>Enter Email ID </label></td>
+                            </tr>
+                            <tr>
+                                <td><input type="email" name="emailid"/></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Sent" class="btn btn-primary"/></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+             <!-- admin sign in modal starts-->
                                     <div class="col-md-12">
                 <div class="modal fade" id="modal-container-850928" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -348,3 +326,4 @@
        
     </body>
 </html>
+

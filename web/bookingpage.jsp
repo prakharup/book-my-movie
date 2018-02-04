@@ -1,16 +1,26 @@
-<%-- 
-    Document   : index.jsp
-    Author     : PRAKHAR
---%>
-<%@page import="java.sql.*"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.Random"%>
+
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection,java.sql.PreparedStatement,java.sql.ResultSet"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*"%>
 <%
     int rno;
     Random r = new Random();
-    rno = r.nextInt(Integer.MAX_VALUE);//Integer.max_value is the largest possible value of integer
-    Connection con;
-    Statement st;
-    ResultSet rs;
+    rno = r.nextInt(Integer.MAX_VALUE);
+    Date date = new java.util.Date();
+    int d = date.getDate();
+    int m = date.getMonth() + 1;
+    int y = date.getYear() + 1900;
+    String fbdt = String.valueOf(d) + "/" + String.valueOf(m) + "/" + String.valueOf(y);
+    Connection con = null;
+    Statement ps;
+    ResultSet rs = null;
+    try {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "prakhar");
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 %>
 <!doctype html>
 <html>
@@ -23,7 +33,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
+         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                      <nav class="navbar navbar-default" role="navigation">
@@ -200,94 +210,85 @@
                                         }
                                     %>
                                 </i></p>
-                           <div class="carousel slide" id="carousel-793811">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-slide-to="0" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="1" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="2" data-target="#carousel-793811">
-                                    </li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img alt="Carousel Bootstrap First" src="images/10.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Second" src="images/6.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Third" src="images/5.jpg">                                        
-                                    </div>
-                                </div> <a class="left carousel-control" href="#carousel-793811" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-793811" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                      
-                         
-                </div>
-                                 <div class="row">
-                    <div class="col-md-12">&nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">
-                                                Panel title
-                                            </h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            Panel content
-                                        </div>
-                                        <div class="panel-footer">
-                                            Panel footer
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="row">
-                                        <%
-                                            try {
-                                                Class.forName("oracle.jdbc.driver.OracleDriver");
-                                                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "niit123");
-                                                st = con.createStatement();
-                                                rs = st.executeQuery("select * from movies where status='true'");
-                                                while (rs.next()) {%>
-                                        <div class="col-md-4">
-                                            <div class="thumbnail">
-                                                <img alt="<%=rs.getString("TITLE")%>" src="<%=rs.getString("poster")%>" width="180" height="150" />
-                                                <div class="caption">
-                                                    <p>
-                                                        <%=rs.getString("TITLE")%><br>
-                                                        <%=rs.getString("LANGUAGE")%><br>
-                                                    </p>
-                                                    <a href="bookingpage.jsp?t=<%=rs.getString("TITLE")%>&p=<%=rs.getString("poster")%>"><button class="btn btn-primary">Book Now</button></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                con.close();
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
+                       </div>
                     </div>
                 </div>
             </div>
-                                    <!-- admin sign in modal starts-->
+                            <%--     <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    &nbsp;
+                </div>
+                <div class="col-md-10" style="background-color: #f8f8f8;">
+                    <div class="row">
+                        <div class="col-md-3">                            
+                           <%-- <p><br/>
+                                <img src="<%=request.getParameter("p")%>" width="200" height="250" alt="<%=request.getParameter("t")%>"/>
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <h2><%=request.getParameter("t")%></h2>
+                        </div>
+                        <div class="col-md-7">&nbsp;</div>                                             
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    &nbsp;
+                </div>--%>
+
+                <div class="col-md-10" style="background-color: #f8f8f8;">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Title</th>
+                            <th>City Name</th>
+                            <th>Theater Name</th>
+                            <th>Show Date</th>
+                            <th>Show Time</th>
+                        </tr>
+                        <%
+                            ps = con.createStatement();
+                            //ps.setString(1, request.getParameter("t"));
+                            rs = ps.executeQuery("select * from mapping");
+                            while (rs.next()) {
+                        %>
+                        <tr>
+                            <td><%=rs.getString("title")%></td>
+                            <td><%=rs.getString("city")%></td>
+                            <td><%=rs.getString("theatre")%></td>
+                            <td><%=rs.getString("mdate")%></td>
+                            <td>
+                                <a href="SeatLayout.jsp?t=<%=request.getParameter("t")%>&time=<%=rs.getString("time1")%>" class="btn" style="background-color: blue;color: white;border-radius:10px;"><%=rs.getString("time1")%></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="SeatLayout.jsp?t=<%=request.getParameter("t")%>&time=<%=rs.getString("time2")%>" class="btn" style="background-color: blue;color: white;border-radius:10px;"><%=rs.getString("time2")%></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="SeatLayout.jsp?t=<%=request.getParameter("t")%>&time=<%=rs.getString("time3")%>"  class="btn" style="background-color: blue;color: white;border-radius:10px;"><%=rs.getString("time3")%></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="SeatLayout.jsp?t=<%=request.getParameter("t")%>&time=<%=rs.getString("time4")%>" class="btn" style="background-color: blue;color: white;border-radius:10px;"><%=rs.getString("time4")%></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                    </table>
+
+                </div>
+            <div class="col-md-3">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    &nbsp;
+                </div>
+            </div>
+                          <!-- admin sign in modal starts-->
                                     <div class="col-md-12">
                 <div class="modal fade" id="modal-container-850928" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -344,7 +345,6 @@
                     </div>
                 </div>
             </div>
+         </div>
         
-       
     </body>
-</html>

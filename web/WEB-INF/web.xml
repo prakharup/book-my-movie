@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <!-- Smtp settings-->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>prakharupreti13@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>hiiiiiii</param-value>
+    </context-param>
     <servlet>
         <servlet-name>AddMovie</servlet-name>
         <servlet-class>admin.AddMovie</servlet-class>
@@ -20,6 +37,30 @@
         <servlet-name>MappingServlet</servlet-name>
         <servlet-class>admin.MappingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminLogin</servlet-name>
+        <servlet-class>admin.AdminLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerLogin</servlet-name>
+        <servlet-class>customer.CustomerLogin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-class>customer.RegistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailSendingServlet</servlet-name>
+        <servlet-class>customer.EmailSendingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>mailutility</servlet-name>
+        <servlet-class>customer.mailutility</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>support</servlet-name>
+        <servlet-class>customer.support</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddMovie</servlet-name>
         <url-pattern>/AddMovie</url-pattern>
@@ -39,6 +80,30 @@
     <servlet-mapping>
         <servlet-name>MappingServlet</servlet-name>
         <url-pattern>/MappingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminLogin</servlet-name>
+        <url-pattern>/AdminLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerLogin</servlet-name>
+        <url-pattern>/CustomerLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrationServlet</servlet-name>
+        <url-pattern>/RegistrationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailSendingServlet</servlet-name>
+        <url-pattern>/EmailSendingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mailutility</servlet-name>
+        <url-pattern>/mailutility</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>support</servlet-name>
+        <url-pattern>/support</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

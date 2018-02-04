@@ -1,13 +1,15 @@
 <%-- 
-    Document   : index.jsp
+    Document   : SeatLayout
+    Created on : Jan 23, 2018, 9:13:04 PM
     Author     : PRAKHAR
 --%>
+
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.Random"%>
 <%
     int rno;
     Random r = new Random();
-    rno = r.nextInt(Integer.MAX_VALUE);//Integer.max_value is the largest possible value of integer
+    rno = r.nextInt(Integer.MAX_VALUE);
     Connection con;
     Statement st;
     ResultSet rs;
@@ -21,6 +23,31 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" language="javascript">
+            function calc()
+            {
+                var rate,price,tax,np;
+                var a = document.getElementById("selc").value;
+                document.getElementById("cclass").innerHTML = a;
+                document.getElementById("tclass").value = a;
+                var b = document.getElementById("tick").value;
+                document.getElementById("ticks").innerHTML = b;
+                document.getElementById("tticks").value = b;
+                if (a == "Gold") {
+                    rate = 280;
+                }
+                else
+                {
+                    rate=250;
+                }
+                price=rate*parseInt(b);
+                tax=(price*15.6)/100;
+                np=price+tax;
+                document.getElementById("price").innerHTML=price;
+                document.getElementById("tax").innerHTML=tax;
+                document.getElementById("np").innerHTML=np;
+            }
+        </script>
     </head>
     <body>
         <div class="container-fluid">
@@ -41,7 +68,7 @@
                                     <a href="#">Reviews</a>
                                 </li>
                             </ul>
-                               <%
+                               <%--
                                 String info = "", msg1 = "", msg2 = "";
                                 Cookie ck[] = request.getCookies();
                                 for (Cookie c : ck) {
@@ -54,7 +81,7 @@
                                         msg2 = "<a id = \"modal-850927\" href = \"#modal-container-850927\" role = \"button\" class=\"btn\" data-toggle=\"modal\">Register</a>";
                                     }
                                 }
-                            %>
+                           
                              <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <%=msg1%>
@@ -63,7 +90,7 @@
                                     <%=msg2%>                                    			
                                 </li>
                             </ul>
-                        </div>
+                        </div>--%>
                     </nav>
                                 <!--Sign in modal starts-->
                          <div class="col-md-12">
@@ -190,104 +217,112 @@
                                         }
                                     %>
                                 </i></p>
-                            <p align="center" style="background-color: #f8f8f8;"><i>
-                                    <%
-                                        String alogerr = (String) request.getAttribute("alogerr");
-                                        if (alogerr == null) {
-                                            out.println("");
-                                        } else {
-                                            out.println(alogerr);
-                                        }
-                                    %>
-                                </i></p>
-                           <div class="carousel slide" id="carousel-793811">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-slide-to="0" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="1" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="2" data-target="#carousel-793811">
-                                    </li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img alt="Carousel Bootstrap First" src="images/10.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Second" src="images/6.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Third" src="images/5.jpg">                                        
-                                    </div>
-                                </div> <a class="left carousel-control" href="#carousel-793811" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-793811" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                      
-                         
-                </div>
-                                 <div class="row">
-                    <div class="col-md-12">&nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">
-                                                Panel title
-                                            </h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            Panel content
-                                        </div>
-                                        <div class="panel-footer">
-                                            Panel footer
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="row">
-                                        <%
-                                            try {
-                                                Class.forName("oracle.jdbc.driver.OracleDriver");
-                                                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "niit123");
-                                                st = con.createStatement();
-                                                rs = st.executeQuery("select * from movies where status='true'");
-                                                while (rs.next()) {%>
-                                        <div class="col-md-4">
-                                            <div class="thumbnail">
-                                                <img alt="<%=rs.getString("TITLE")%>" src="<%=rs.getString("poster")%>" width="180" height="150" />
-                                                <div class="caption">
-                                                    <p>
-                                                        <%=rs.getString("TITLE")%><br>
-                                                        <%=rs.getString("LANGUAGE")%><br>
-                                                    </p>
-                                                    <a href="bookingpage.jsp?t=<%=rs.getString("TITLE")%>&p=<%=rs.getString("poster")%>"><button class="btn btn-primary">Book Now</button></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                con.close();
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
+                                
                         </div>
                     </div>
                 </div>
-            </div>
-                                    <!-- admin sign in modal starts-->
+                                <div class="row">
+                    <div class="col-md-12">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-5" style="text-align: center;background-color: #f8f8f8;">
+                        <form action="#">
+                            <table class="table table-striped" style="width: 500px;">
+                                <tr>
+                                    <th>Movie Name</th>
+                                    <td><input type="text" class="form-control" name="moviename" value="<%=request.getParameter("t")%>" readonly/></td>
+                                </tr>
+                                <tr>
+                                    <th>Show Time</th>
+                                    <td><input type="text" class="form-control" name="time" value="<%=request.getParameter("time")%>" readonly/></td>
+                                </tr>
+                                <tr>
+                                    <th>Select Class</th>
+                                    <td>
+                                        <select name="class" id="selc" class="form-control">
+                                            <option>Class</option>
+                                            <option>Gold</option>
+                                            <option>Silver</option>
+                                        </select><br/>
+                                        <input type="hidden" id="tclass"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Select Tickets</th>
+                                    <td>
+                                        <select id="tick" name="tickets" class="form-control">
+                                            <option>Tickets</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                        </select><br/>
+                                        <input type="hidden" id="tticks"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <input type="button" value="Calculate" class="btn btn-primary" onclick="calc()"/>
+                                    </td>
+                                    <td style="text-align: right;"><input type="submit" value="Proceed" class="btn btn-primary"/> </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">
+                                        </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                               <div class="col-md-5" style="text-align: right;background-color: #f8f8f8;">
+                        <table class="table" style="border:1px;">
+                            <tr>
+                                <th colspan="2" style="text-align: center;">Rate List</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">Gold Class : Rs. 280</th>
+                                <th style="text-align: center;">Silver Class : Rs. 250</th>
+                            </tr>                            
+                            <tr>
+                                <th style="text-align: center;" colspan="2"><h3>Order Summary</h3></th>
+                            </tr>
+                            <tr>
+                                <th>Class Selected : <label id="cclass"></label></th>
+                                <th>Tickets Selected : <label id="ticks"></label></th>
+                            </tr>
+                            <tr>
+                                <th>Price : <label id="price"></label> </th>
+                                <th>Service Tax : <label id="tax"></label> </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Net Payable : <label id="np"></label> </th>
+                            </tr>
+                            <tr>
+                                <th colspan="2" style="text-align: right;"><br/>&nbsp; </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-1">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        &nbsp;
+                    </div>
+                </div>
+
+            <!-- admin sign in modal starts-->
                                     <div class="col-md-12">
                 <div class="modal fade" id="modal-container-850928" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -344,7 +379,5 @@
                     </div>
                 </div>
             </div>
-        
-       
-    </body>
-</html>
+      </body>
+            </html>

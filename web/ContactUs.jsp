@@ -1,5 +1,6 @@
 <%-- 
-    Document   : index.jsp
+    Document   : ContactUs
+    Created on : Jan 23, 2018, 9:36:25 PM
     Author     : PRAKHAR
 --%>
 <%@page import="java.sql.*"%>
@@ -7,7 +8,7 @@
 <%
     int rno;
     Random r = new Random();
-    rno = r.nextInt(Integer.MAX_VALUE);//Integer.max_value is the largest possible value of integer
+    rno = r.nextInt(Integer.MAX_VALUE);
     Connection con;
     Statement st;
     ResultSet rs;
@@ -22,7 +23,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body>
+<body>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -200,95 +201,50 @@
                                         }
                                     %>
                                 </i></p>
-                           <div class="carousel slide" id="carousel-793811">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-slide-to="0" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="1" data-target="#carousel-793811">
-                                    </li>
-                                    <li data-slide-to="2" data-target="#carousel-793811">
-                                    </li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img alt="Carousel Bootstrap First" src="images/10.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Second" src="images/6.jpg">                                        
-                                    </div>
-                                    <div class="item">
-                                        <img alt="Carousel Bootstrap Third" src="images/5.jpg">                                        
-                                    </div>
-                                </div> <a class="left carousel-control" href="#carousel-793811" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-793811" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                      
-                         
+                                <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
                 </div>
-                                 <div class="row">
-                    <div class="col-md-12">&nbsp;
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-1">
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title">
-                                                Panel title
-                                            </h3>
-                                        </div>
-                                        <div class="panel-body">
-                                            Panel content
-                                        </div>
-                                        <div class="panel-footer">
-                                            Panel footer
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="row">
-                                        <%
-                                            try {
-                                                Class.forName("oracle.jdbc.driver.OracleDriver");
-                                                con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "system", "niit123");
-                                                st = con.createStatement();
-                                                rs = st.executeQuery("select * from movies where status='true'");
-                                                while (rs.next()) {%>
-                                        <div class="col-md-4">
-                                            <div class="thumbnail">
-                                                <img alt="<%=rs.getString("TITLE")%>" src="<%=rs.getString("poster")%>" width="180" height="150" />
-                                                <div class="caption">
-                                                    <p>
-                                                        <%=rs.getString("TITLE")%><br>
-                                                        <%=rs.getString("LANGUAGE")%><br>
-                                                    </p>
-                                                    <a href="bookingpage.jsp?t=<%=rs.getString("TITLE")%>&p=<%=rs.getString("poster")%>"><button class="btn btn-primary">Book Now</button></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <%
-                                                }
-                                                con.close();
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-8" style="background-color: #f8f8f8;">
+                    <h4 style="text-align: center;">Contact Us</h4>
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
                 </div>
             </div>
-                                    <!-- admin sign in modal starts-->
-                                    <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+                <div class="col-md-8" style="background-color: #f8f8f8;">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Person 1</th>
+                            <td><h3>Abc</h3><br>
+                                <p>987766544332</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Person 2</th>
+                            <td><h3>Xyz</h3><br>
+                                <p>1234567890</p>
+                            </td>
+                            
+                        </tr>
+                      
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    &nbsp;
+                </div>
+            </div>
+                                 <div class="col-md-12">
                 <div class="modal fade" id="modal-container-850928" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -348,3 +304,5 @@
        
     </body>
 </html>
+
+
